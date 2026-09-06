@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hinoki Café — Japanskt inspirerat kafé i Malmö</title>
+<meta name="description" content="Hinoki Café på Ystadsgatan i Malmö. Matcha, hojicha, japanska sandos och tiramisu i en lugn, japansk-inspirerad miljö. 4,7 i betyg av 124 recensioner.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --washi:#F3EEE2;
+    --washi-deep:#E8DFC7;
+    --wood:#C9A876;
+    --wood-dark:#8B6B3D;
+    --ink:#2B2926;
+    --ink-soft:#5A5650;
+    --matcha:#6B7A4F;
+    --matcha-deep:#465432;
+    --hanko:#9E3B34;
+    --paper-line: rgba(43,41,38,0.12);
+    --max: 1100px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--washi);
+    color:var(--ink);
+    font-family:'Zen Kaku Gothic New', 'Noto Sans', sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Shippori Mincho', 'Noto Serif', serif;
+    font-weight:600;
+    color:var(--ink);
+    margin:0;
+  }
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  ::selection{ background:var(--matcha); color:var(--washi); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(243,238,226,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Shippori Mincho', serif; font-size:1.25rem; font-weight:700;
+    letter-spacing:0.02em;
+  }
+  .brand .mark{width:22px; height:22px; flex-shrink:0;}
+  nav.links{display:flex; align-items:center; gap:30px;}
+  nav.links a{
+    font-size:0.95rem; text-decoration:none; color:var(--ink-soft);
+    position:relative; padding-bottom:3px;
+  }
+  nav.links a:hover{color:var(--ink);}
+  nav.links a.cta{
+    background:var(--matcha-deep); color:var(--washi);
+    padding:9px 18px; border-radius:2px;
+  }
+  nav.links a.cta:hover{background:var(--ink);}
+  .nav-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .nav-toggle span{display:block; width:24px; height:2px; background:var(--ink); margin:5px 0;}
+
+  @media (max-width:820px){
+    nav.links{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--washi); flex-direction:column; align-items:flex-start;
+      padding:20px 28px 26px; gap:18px; border-bottom:1px solid var(--paper-line);
+      display:none;
+    }
+    nav.links.open{display:flex;}
+    nav.links a.cta{align-self:flex-start;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO / 3D SCENE ---------- */
+  .hero{
+    position:relative;
+    height:100svh; min-height:560px;
+    overflow:hidden;
+    perspective:1200px;
+    background:linear-gradient(180deg,#EFE7D2 0%, #E4D8B8 60%, #D8C89C 100%);
+  }
+  .hero-scene{
+    position:absolute; inset:0;
+    transform-style:preserve-3d;
+  }
+  .hero-layer{
+    position:absolute; inset:0;
+    transform-style:preserve-3d;
+    will-change:transform;
+    pointer-events:none;
+  }
+  #layer-grain{ opacity:0.5; }
+  #layer-branch{ display:flex; justify-content:flex-end; align-items:flex-start; padding:6% 4% 0 0; }
+  #layer-branch svg{ width:min(46vw,520px); height:auto; opacity:0.9;}
+  #layer-steam{ display:flex; justify-content:center; align-items:center; }
+  #layer-steam svg{ width:min(38vw,360px); height:auto; margin-top:-8vh; opacity:0.55; }
+  #layer-bowl{ display:flex; justify-content:center; align-items:flex-end; padding-bottom:8vh; }
+  #layer-bowl svg{ width:min(30vw,260px); height:auto; filter:drop-shadow(0 18px 22px rgba(43,41,38,0.18)); }
+
+  .hero-content{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:0 0 64px;
+    transform-style:preserve-3d;
+    pointer-events:none;
+  }
+  .hero-content .wrap{ pointer-events:auto; }
+  .hero-content .wrap{max-width:var(--max);}
+  .hero-content .eyebrow-plain{
+    font-size:0.95rem; color:var(--matcha-deep); margin:0 0 10px;
+  }
+  .hero-content h1{
+    font-size:clamp(2.1rem, 5vw, 3.6rem);
+    max-width:11.5em;
+    line-height:1.15;
+  }
+  .hero-content p.lede{
+    max-width:480px; margin-top:18px; font-size:1.05rem; color:var(--ink-soft);
+  }
+  .hero-ctas{ display:flex; gap:16px; margin-top:30px; flex-wrap:wrap; }
+  .btn{
+    display:inline-block; padding:13px 26px; border-radius:2px;
+    text-decoration:none; font-size:0.98rem; border:1px solid transparent;
+    transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary{ background:var(--matcha-deep); color:var(--washi); }
+  .btn-primary:hover{ background:var(--ink); }
+  .btn-outline{ border-color:var(--ink); color:var(--ink); }
+  .btn-outline:hover{ background:var(--ink); color:var(--washi); }
+
+  .status-strip{
+    position:relative; z-index:2;
+    background:var(--ink); color:var(--washi);
+  }
+  .status-inner{
+    max-width:var(--max); margin:0 auto; padding:12px 28px;
+    display:flex; flex-wrap:wrap; gap:10px 28px; align-items:center;
+    font-size:0.92rem;
+  }
+  .status-inner .dot{
+    display:inline-block; width:8px; height:8px; border-radius:50%;
+    background:var(--matcha); margin-right:8px;
+  }
+  .status-inner .dot.closed{ background:var(--hanko); }
+  .status-inner span.sep{ color:rgba(243,238,226,0.4); }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:96px 0; position:relative; }
+  section.alt{ background:var(--washi-deep); }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head h2{ font-size:clamp(1.7rem,3.2vw,2.4rem); line-height:1.25; }
+  .section-head p{ color:var(--ink-soft); margin-top:14px; font-size:1.05rem; }
+
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+  }
+  .about-grid.reverse{ direction:rtl; }
+  .about-grid.reverse > *{ direction:ltr; }
+  .about-art{ display:flex; justify-content:center; }
+  .about-art svg{ width:100%; max-width:340px; }
+  .about-copy p{ color:var(--ink-soft); margin:0 0 16px; font-size:1.02rem; }
+  .about-copy p:last-child{ margin-bottom:0; }
+  .pull-quote{
+    margin:28px 0 0; padding-left:20px; border-left:2px solid var(--matcha);
+    font-family:'Shippori Mincho', serif; font-size:1.15rem; color:var(--ink);
+  }
+
+  @media (max-width:820px){
+    .about-grid, .about-grid.reverse{ grid-template-columns:1fr; direction:ltr; gap:32px; }
+    .about-art svg{ max-width:220px; }
+  }
+
+  /* ---------- MENU ---------- */
+  .menu-note{ color:var(--ink-soft); font-size:0.95rem; margin-top:-24px; margin-bottom:44px; max-width:640px; }
+  .menu-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0 64px; }
+  .menu-cat{ margin-bottom:44px; }
+  .menu-cat h3{ font-size:1.2rem; padding-bottom:10px; border-bottom:1px solid var(--paper-line); margin-bottom:16px; }
+  .menu-item{ display:flex; justify-content:space-between; gap:16px; padding:9px 0; }
+  .menu-item .name{ font-size:1rem; }
+  .menu-item .desc{ display:block; color:var(--ink-soft); font-size:0.88rem; margin-top:2px; }
+  .menu-item .price{ white-space:nowrap; font-variant-numeric:tabular-nums; color:var(--ink-soft); }
+
+  @media (max-width:820px){ .menu-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- REVIEWS ---------- */
+  .rating-summary{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:44px; flex-wrap:wrap;
+  }
+  .rating-summary .num{ font-family:'Shippori Mincho', serif; font-size:3rem; font-weight:700; }
+  .rating-summary .meta{ color:var(--ink-soft); font-size:1rem; }
+  .reviews-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .review-card{
+    background:var(--washi); border:1px solid var(--paper-line); padding:26px;
+    border-radius:2px;
+  }
+  section.alt .review-card{ background:#F8F4E9; }
+  .review-card p{ color:var(--ink); font-size:0.98rem; margin:0 0 16px; }
+  .review-card .who{ font-size:0.88rem; color:var(--ink-soft); }
+  @media (max-width:900px){ .reviews-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- HOURS / LOCATION ---------- */
+  .location-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; }
+  table.hours{ width:100%; border-collapse:collapse; font-size:1rem; }
+  table.hours td{ padding:11px 0; border-bottom:1px solid var(--paper-line); }
+  table.hours td:last-child{ text-align:right; color:var(--ink-soft); }
+  table.hours tr.today td{ color:var(--matcha-deep); font-weight:700; }
+  .addr-block{ margin-top:28px; }
+  .addr-block p{ margin:0 0 6px; }
+  .addr-block a{ color:var(--matcha-deep); text-decoration:underline; }
+  @media (max-width:820px){ .location-grid{ grid-template-columns:1fr; gap:36px; } }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink); color:var(--washi); padding:56px 0 28px;
+  }
+  .footer-grid{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:36px;
+  }
+  footer .brand{ color:var(--washi); }
+  footer nav{ display:flex; gap:22px; flex-wrap:wrap; }
+  footer nav a{ text-decoration:none; color:rgba(243,238,226,0.75); font-size:0.95rem; }
+  footer nav a:hover{ color:var(--washi); }
+  .footer-bottom{
+    border-top:1px solid rgba(243,238,226,0.15); padding-top:20px;
+    font-size:0.85rem; color:rgba(243,238,226,0.55);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10.5" stroke="var(--matcha-deep)" stroke-width="1.4"/><path d="M12 5v14M6 9c3 2 9 2 12 0M6 15c3-2 9-2 12 0" stroke="var(--matcha-deep)" stroke-width="1.1"/></svg>
+      Hinoki Café
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Öppna meny" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="links" id="navLinks">
+      <a href="#om-oss">Om oss</a>
+      <a href="#meny">Meny</a>
+      <a href="#recensioner">Recensioner</a>
+      <a href="#hitta-hit">Hitta hit</a>
+      <a class="cta" href="https://www.instagram.com/hinokicafe" target="_blank" rel="noopener">Följ oss</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<section class="hero" id="heroScene">
+  <div class="hero-scene">
+    <div class="hero-layer" id="layer-grain">
+      <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 80 C 200 60, 300 100, 500 70 S 800 90 800 90" stroke="#C9A876" stroke-width="1.4" fill="none" opacity="0.5"/>
+        <path d="M0 180 C 220 160, 320 210, 520 175 S 800 195 800 195" stroke="#C9A876" stroke-width="1.2" fill="none" opacity="0.4"/>
+        <path d="M0 320 C 240 300, 340 345, 540 315 S 800 330 800 330" stroke="#C9A876" stroke-width="1.4" fill="none" opacity="0.4"/>
+        <path d="M0 470 C 210 450, 330 495, 530 465 S 800 480 800 480" stroke="#C9A876" stroke-width="1.2" fill="none" opacity="0.35"/>
+      </svg>
+    </div>
+
+    <div class="hero-layer" id="layer-branch">
+      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+        <path d="M210 10 C 160 60, 140 110, 90 150 C 60 175, 30 190, 10 210" stroke="var(--matcha-deep)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <g fill="var(--matcha)">
+          <ellipse cx="150" cy="70" rx="16" ry="7" transform="rotate(35 150 70)"/>
+          <ellipse cx="120" cy="105" rx="18" ry="7.5" transform="rotate(50 120 105)"/>
+          <ellipse cx="95" cy="140" rx="16" ry="7" transform="rotate(30 95 140)"/>
+          <ellipse cx="60" cy="172" rx="17" ry="7" transform="rotate(55 60 172)"/>
+          <ellipse cx="180" cy="45" rx="14" ry="6" transform="rotate(20 180 45)"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-layer" id="layer-steam">
+      <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <path d="M70 220 C 50 190, 90 170, 70 140 C 50 110, 90 90, 74 60" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M120 220 C 100 195, 140 175, 118 148 C 98 122, 136 100, 118 70" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.35"/>
+      </svg>
+    </div>
+
+    <div class="hero-layer" id="layer-bowl">
+      <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="110" cy="130" rx="92" ry="18" fill="rgba(43,41,38,0.08)"/>
+        <path d="M30 70 C 30 115, 65 140, 110 140 C 155 140, 190 115, 190 70 L 30 70 Z" fill="#EFE7D2" stroke="var(--ink)" stroke-width="2"/>
+        <ellipse cx="110" cy="70" rx="80" ry="20" fill="var(--matcha)" stroke="var(--ink)" stroke-width="2"/>
+        <ellipse cx="110" cy="66" rx="60" ry="12" fill="var(--matcha-deep)" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="wrap">
+        <p class="eyebrow-plain">Ystadsgatan 33A, Malmö</p>
+        <h1>Ett andrum av japanskt lugn, en kopp matcha i taget</h1>
+        <p class="lede">Hinoki är ett litet kafé byggt kring långsamt bryggd matcha, hojicha och japanska smaker — ett stänk av Tokyo mitt i Malmö.</p>
+        <div class="hero-ctas">
+          <a href="#meny" class="btn btn-primary">Se menyn</a>
+          <a href="#hitta-hit" class="btn btn-outline">Hitta hit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="status-strip">
+  <div class="status-inner">
+    <span id="openStatus"><span class="dot"></span>Laddar öppettider…</span>
+    <span class="sep">|</span>
+    <span>Betyg 4,7 av 5, baserat på 124 recensioner</span>
+    <span class="sep">|</span>
+    <span>Dine-in · 1–100 kr per person</span>
+  </div>
+</div>
+
+<section id="om-oss">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-art">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="160" height="160" fill="none" stroke="var(--wood)" stroke-width="1.5"/>
+          <path d="M20 60 H180 M20 100 H180 M20 140 H180" stroke="var(--wood)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="46" fill="var(--matcha)" opacity="0.15"/>
+          <circle cx="100" cy="100" r="46" stroke="var(--matcha-deep)" stroke-width="1.5" fill="none"/>
+          <path d="M100 62 v76 M64 100 h72" stroke="var(--matcha-deep)" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="about-copy">
+        <div class="section-head">
+          <h2>Namnet kommer från trädet, inte tvärtom</h2>
+        </div>
+        <p>Hinoki är japansk cypress — träslaget som badhus, tehus och tempel i Japan byggs av, känt för sin lugna doft och sitt tålamod att åldras vackert. Det är känslan vi ville bygga kafé kring: något enkelt, genuint och gjort med tid.</p>
+        <p>Hos oss är matchan i fokus. Varje kopp vispas för hand, med bladen valda för balans snarare än bitterhet, och serveras tillsammans med japanskt inspirerade sandos och hemgjord tiramisu i flera smaker.</p>
+        <p class="pull-quote">"Fick känslan av att sitta på ett litet kafé i Tokyo — perfekt ställe för en dejt, till ett riktigt bra pris."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="meny">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Meny</h2>
+      <p>Ett urval av det vi är mest kända för. Menyn varierar något över säsong — det senaste utbudet, inklusive dagens tiramisu, hittar du alltid på vår Instagram.</p>
+    </div>
+
+    <div class="menu-grid">
+      <div>
+        <div class="menu-cat">
+          <h3>Matcha</h3>
+          <div class="menu-item"><span class="name">Iced Matcha Latte</span><span class="price">65 kr</span></div>
+          <div class="menu-item"><span class="name">Dirty Matcha<span class="desc">Matcha, dubbel espresso, söt grädde</span></span><span class="price">75 kr</span></div>
+          <div class="menu-item"><span class="name">Matcha med mango</span><span class="price">70 kr</span></div>
+          <div class="menu-item"><span class="name">Hojicha Latte<span class="desc">Rostat grönt te, mjölk</span></span><span class="price">65 kr</span></div>
+        </div>
+        <div class="menu-cat">
+          <h3>Iste</h3>
+          <div class="menu-item"><span class="name">Yuzu Iste</span><span class="price">55 kr</span></div>
+          <div class="menu-item"><span class="name">Litchi Iste</span><span class="price">55 kr</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="menu-cat">
+          <h3>Kaffe</h3>
+          <div class="menu-item"><span class="name">Café Latte</span><span class="price">45 kr</span></div>
+          <div class="menu-item"><span class="name">Cortado</span><span class="price">40 kr</span></div>
+          <div class="menu-item"><span class="name">Filterkaffe</span><span class="price">35 kr</span></div>
+        </div>
+        <div class="menu-cat">
+          <h3>Sandos &amp; tiramisu</h3>
+          <div class="menu-item"><span class="name">Tamago Sando<span class="desc">Japansk äggsmörgås</span></span><span class="price">65 kr</span></div>
+          <div class="menu-item"><span class="name">Jordgubbssando</span><span class="price">75 kr</span></div>
+          <div class="menu-item"><span class="name">Hojicha Tiramisu</span><span class="price">65 kr</span></div>
+          <div class="menu-item"><span class="name">Pistachio Tiramisu<span class="desc">Ofta slutsåld — kom tidigt</span></span><span class="price">70 kr</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recensioner">
+  <div class="wrap">
+    <div class="rating-summary">
+      <span class="num">4,7</span>
+      <span class="meta">av 5 i betyg, baserat på 124 recensioner på Google</span>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p>"Så himla fint kafé — Malmö i ett nötskal. Mysigt, personligt och genuint enkelt i ordets sanna bemärkelse."</p>
+        <div class="who">Francisca, Google-recension</div>
+      </div>
+      <div class="review-card">
+        <p>Beskriver besöket som att för en stund vara på ett litet kafé i Tokyo — ett omtänksamt ställe för en dejt, till ett väldigt schysst pris.</p>
+        <div class="who">Samir, Google-recension</div>
+      </div>
+      <div class="review-card">
+        <p>Lyfter fram matchan med mango och tiramisun som höjdpunkter, och beskriver stämningen som mysig trots enstaka köer på helger.</p>
+        <div class="who">Raghad, Google-recension</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="hitta-hit">
+  <div class="wrap">
+    <div class="location-grid">
+      <div>
+        <div class="section-head">
+          <h2>Öppettider</h2>
+        </div>
+        <table class="hours" id="hoursTable">
+          <tr data-day="0"><td>Söndag</td><td>Stängt</td></tr>
+          <tr data-day="1"><td>Måndag</td><td>Stängt</td></tr>
+          <tr data-day="2"><td>Tisdag</td><td>08.00–18.30</td></tr>
+          <tr data-day="3"><td>Onsdag</td><td>08.00–18.30</td></tr>
+          <tr data-day="4"><td>Torsdag</td><td>08.00–18.30</td></tr>
+          <tr data-day="5"><td>Fredag</td><td>10.00–18.00</td></tr>
+          <tr data-day="6"><td>Lördag</td><td>10.00–18.00</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="section-head">
+          <h2>Hitta hit</h2>
+        </div>
+        <div class="addr-block">
+          <p><strong>Hinoki Café</strong></p>
+          <p>Ystadsgatan 33A</p>
+          <p>214 44 Malmö</p>
+          <p style="margin-top:18px;">
+            <a href="https://www.google.com/maps/search/?api=1&query=Hinoki+Caf%C3%A9+Ystadsgatan+33A+Malm%C3%B6" target="_blank" rel="noopener">Öppna i Google Maps →</a>
+          </p>
+        </div>
+        <div class="hero-ctas" style="margin-top:28px;">
+          <a href="https://www.instagram.com/hinokicafe" target="_blank" rel="noopener" class="btn btn-primary">Följ oss på Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <a href="#top" class="brand">Hinoki Café</a>
+      <nav>
+        <a href="#om-oss">Om oss</a>
+        <a href="#meny">Meny</a>
+        <a href="#recensioner">Recensioner</a>
+        <a href="#hitta-hit">Hitta hit</a>
+        <a href="https://www.instagram.com/hinokicafe" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>Ystadsgatan 33A, 214 44 Malmö</span>
+      <span>© 2026 Hinoki Café</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Opening hours logic (local browser time)
+  const hours = {
+    0: null,
+    1: null,
+    2: [8*60, 18*60+30],
+    3: [8*60, 18*60+30],
+    4: [8*60, 18*60+30],
+    5: [10*60, 18*60],
+    6: [10*60, 18*60]
+  };
+  const dayNames = ['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'];
+
+  function formatClock(mins){
+    const h = Math.floor(mins/60), m = mins%60;
+    return h + (m ? '.' + String(m).padStart(2,'0') : '');
+  }
+
+  function updateStatus(){
+    const now = new Date();
+    const day = now.getDay();
+    const mins = now.getHours()*60 + now.getMinutes();
+    const todayHours = hours[day];
+    const el = document.getElementById('openStatus');
+
+    if (todayHours && mins >= todayHours[0] && mins < todayHours[1]){
+      el.innerHTML = '<span class="dot"></span>Öppet nu, stänger ' + formatClock(todayHours[1]);
+    } else {
+      // find next open day
+      let d = day, tries = 0, foundOpenLaterToday = todayHours && mins < todayHours[0];
+      if (foundOpenLaterToday){
+        el.innerHTML = '<span class="dot closed"></span>Stängt, öppnar ' + formatClock(todayHours[0]) + ' idag';
+      } else {
+        d = (day+1) % 7;
+        while (!hours[d] && tries < 7){ d = (d+1)%7; tries++; }
+        el.innerHTML = '<span class="dot closed"></span>Stängt, öppnar ' + formatClock(hours[d][0]) + ' ' + dayNames[d];
+      }
+    }
+
+    document.querySelectorAll('#hoursTable tr').forEach(row => {
+      row.classList.toggle('today', parseInt(row.dataset.day,10) === day);
+    });
+  }
+  updateStatus();
+
+  // 3D scroll diorama
+  const heroScene = document.getElementById('heroScene');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const layers = {
+    grain:  { el: document.getElementById('layer-grain'),  z: -260, speed: 0.15 },
+    branch: { el: document.getElementById('layer-branch'), z: -120, speed: 0.35 },
+    steam:  { el: document.getElementById('layer-steam'),  z:   40, speed: 0.55 },
+    bowl:   { el: document.getElementById('layer-bowl'),   z:  120, speed: 0.75 }
+  };
+
+  let ticking = false;
+  function renderScene(){
+    ticking = false;
+    if (reduceMotion || !heroScene) return;
+    const rect = heroScene.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const progress = Math.min(Math.max(-rect.top / vh, 0), 1);
+
+    Object.values(layers).forEach(layer => {
+      const rise = progress * -80 * layer.speed;
+      const rot = progress * 6 * layer.speed;
+      layer.el.style.transform =
+        'translateZ(' + layer.z + 'px) translateY(' + rise + 'px) rotateX(' + rot + 'deg)';
+    });
+  }
+  function onScroll(){
+    if (!ticking){ window.requestAnimationFrame(renderScene); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onScroll);
+  renderScene();
+</script>
+
+</body>
+</html>
